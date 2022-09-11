@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selecctAllPosts, getPostsStatus, getPostsError, fetchPosts } from './postSlice';
+import PostsRender from './PostsRender';
 
 
 const PostsList = () => {
@@ -21,7 +22,7 @@ const PostsList = () => {
       content = <p>"Loading..."</p>;
   } else if (postStatus === 'succeeded') {
       const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
-      content = orderedPosts.map(post => <PostsExcerpt key={post.id} post={post} />)
+      content = orderedPosts.map(post => <PostsRender key={post.id} post={post} />)
   } else if (postStatus === 'failed') {
       content = <p>{error}</p>;
   }

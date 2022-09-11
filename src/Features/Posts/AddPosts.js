@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Container, Label, SubmitBtn, TextArea, TitleField } from './Components/AddPostsComponents';
 import { useDispatch, useSelector } from 'react-redux';
 import { useStyles } from './Components/useStyles';
-import { postAdded } from './postSlice';
+
 import { selecctAllUsers } from '../Users/userSlice';
 import { FormControl, MenuItem, Select } from '@mui/material';
+import { addNewPost } from "./postSlice";
 
 const AddPosts = () => {
 
@@ -21,10 +22,11 @@ const AddPosts = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [userId, setUserId] = useState('');
+    const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
     const users = useSelector(selecctAllUsers)
 
-    const save = Boolean(title) && Boolean(content) && Boolean(userId)
+    const save = [title, content, userId].every(Boolean) && addRequestStatus === 'idle';
 
     const titleChange = (e) => {
         setTitle(e.target.value)
@@ -39,13 +41,21 @@ const AddPosts = () => {
     }
 
     const onSavePostClicked = () => {
-        if (title && content) {
-            dispatch(
-                postAdded(title, content, userId)
-            )
-            setTitle('')
-            setContent('')
+        if (save) {
+            try {
+                setAddRequestStatus('pending')
+                dispatch(addNewPost({ title, body: content, userId })).unwrap()
+
+                setTitle('')
+                setContent('')
+                setUserId('')
+            } catch (err) {
+                console.error('Failed to save the post', err)
+            } finally {
+                setAddRequestStatus('idle')
+            }
         }
+
     }
 
     return (
