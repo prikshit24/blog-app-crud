@@ -6,8 +6,8 @@ import { Container } from './components'
 const Home = () => {
   return (
     <Container>
-      <PostsList />
       <AddPosts />
+      <PostsList />
     </Container>
   )
 }
