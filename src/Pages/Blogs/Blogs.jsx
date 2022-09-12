@@ -1,8 +1,14 @@
-import { Typography } from '@mui/material'
 import React, { useState } from 'react'
 import AddPosts from '../../Features/Posts/AddPosts'
 import PostsList from '../../Features/Posts/PostsList'
 import { Container } from '../Home/components'
+import { Box, Typography, styled } from "@mui/material";
+
+const Heading = styled(Typography)(({theme}) => ({
+  fontSize:'24px',
+  fontWeight:'bold',
+  cursor:'pointer',
+}))
 
 const Blogs = () => {
 
@@ -10,8 +16,9 @@ const Blogs = () => {
 
   return (
     <Container>
-    <Typography sx={{cursor:'pointer'}} onClick={ () => setCreatePost(!createPost) }>Post New Blog</Typography>
-      {createPost && <AddPosts />}
+    {!createPost && <Heading onClick={ () => setCreatePost(true) }>Click Here To Post New Blog</Heading>}
+    {createPost && <Heading >Post New Blog</Heading>}
+      {createPost && <AddPosts setCreatePost={setCreatePost} />}
       <PostsList />
     </Container>
   )

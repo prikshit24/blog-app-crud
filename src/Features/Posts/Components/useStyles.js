@@ -11,13 +11,6 @@ export const useStyles = makeStyles(() => ({
             justifyContent:'center',
             alignItems:'center',
         },
-        "& .MuiSelect-select.MuiSelect-select": {
-            paddingRight: "0px",
-            border: 0,
-        },
-        "& .MuiOutlinedInput-notchedOutline": {
-            border: 0,
-        },
     },
     select: {
         width: "100%",
@@ -32,12 +25,8 @@ export const useStyles = makeStyles(() => ({
         position:'relative',
         
     },
-    selectIcon: {
-        color: "#fff !important",
-    },
     paper: {
         borderRadius: 12,
-        borderColor: 'white',
         marginTop: 8,
         border: 0,
     },

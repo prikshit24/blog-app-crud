@@ -1,11 +1,17 @@
 import { Box, Typography, styled, TextField, Button } from "@mui/material";
 
 export const Container = styled(Box)(({ theme }) => ({
-    width: '100%',
+    padding:'50px 100px',
     display: 'flex',
     flexDirection: 'column',
-    gap:'10px'
+    gap:'20px'
 }));
+
+export const FormContainer = styled(Box)(({theme}) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    gap:'20px'
+}))
 
 export const Label = styled(Typography)(({theme}) => ({
     fontSize:'20px',
@@ -14,12 +20,14 @@ export const Label = styled(Typography)(({theme}) => ({
 
 export const TitleField = styled(TextField)(({theme}) => ({
     height:'50px',
+    width:'100%',
 }))
 
 export const TextArea = styled('textarea')(({theme}) => ({
     height:'200px',
     padding:'10px',
-    fontSize:'16px'
+    fontSize:'16px',
+    width:'calc(100% - 20px)',
 }))
 
 export const BtnContainer = styled(Box)(({ theme }) => ({
@@ -41,7 +49,7 @@ export const SubmitBtn = styled(Button)(({theme}) => ({
     }
 }))
 
-export const CancleBtn = styled(Button)(({theme}) => ({
+export const DeleteBtn = styled(Button)(({theme}) => ({
     width:'150px',
     height:'50px',
     display:'flex',

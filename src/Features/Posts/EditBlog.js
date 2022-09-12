@@ -4,9 +4,9 @@ import { selectPostById, updatePost, deletePost } from './postSlice'
 import { useParams, useNavigate } from 'react-router-dom'
 
 import { selectAllUsers } from "../Users/userSlice";
-import { Label, TitleField } from './Components/AddPostsComponents';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { useStyles } from './Components/useStyles'
+import { BtnContainer, Container, DeleteBtn, FormContainer, Label, SubmitBtn, TextArea, TitleField } from './Components/EditBlogComponents';
 
 const EditBlog = () => {
     const { postId } = useParams()
@@ -79,48 +79,49 @@ const EditBlog = () => {
     }
 
     return (
-        <section>
+        <Container>
             <h2>Edit Post</h2>
-            <form>
-                <Label>Post Title:</Label>
-
-                <TitleField value={title} onChange={titleChanged} />
-                <Label>Author:</Label>
-                <FormControl className={classes.formControl} fullWidth>
-                    <Select
-                        MenuProps={menuProps}
-                        classes={{
-                            select: classes.select,
-                            icon: classes.selectIcon,
-                            iconOpen: classes.iconOpen,
-                        }}
-                        value={userId} onChange={authorChanged}
+            <FormContainer>
+                <div>
+                    <Label>Post Title:-</Label>
+                    <TitleField value={title} onChange={titleChanged} />
+                </div>
+                <div>
+                    <Label>Author:-</Label>
+                    <FormControl className={classes.formControl} fullWidth>
+                        <Select
+                            MenuProps={menuProps}
+                            classes={{
+                                select: classes.select,
+                                icon: classes.selectIcon,
+                                iconOpen: classes.iconOpen,
+                            }}
+                            value={userId} onChange={authorChanged}
+                        >
+                            {users.map((user, index) => <MenuItem key={index} value={user.id}>{user.name}</MenuItem>)}
+                        </Select>
+                    </FormControl>
+                </div>
+                <div>
+                    <Label >Content:-</Label>
+                    <TextArea
+                        value={content}
+                        onChange={contentChanged}
+                    />
+                </div>
+                <BtnContainer>
+                    <SubmitBtn
+                        onClick={onSavePostClicked}
+                        disabled={!canSave}
                     >
-                        {users.map((user, index) => <MenuItem key={index} value={user.id}>{user.name}</MenuItem>)}
-                    </Select>
-                </FormControl>
-                <label htmlFor="postContent">Content:</label>
-                <textarea
-                    id="postContent"
-                    name="postContent"
-                    value={content}
-                    onChange={contentChanged}
-                />
-                <button
-                    type="button"
-                    onClick={onSavePostClicked}
-                    disabled={!canSave}
-                >
-                    Save Post
-                </button>
-                <button 
-                    type="button"
-                    onClick={deletePostClicked}
-                >
-                    Delete Post
-                </button>
-            </form>
-        </section>
+                        Save Post
+                    </SubmitBtn>
+                    <DeleteBtn onClick={deletePostClicked} >
+                        Delete Post
+                    </DeleteBtn>
+                </BtnContainer>
+            </FormContainer>
+        </Container >
     )
 }
 

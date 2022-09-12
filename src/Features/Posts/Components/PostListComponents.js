@@ -8,7 +8,6 @@ export const Container = styled(Box)(({ theme }) => ({
 export const PostContainer = styled(Box)(({ theme }) => ({
    display: 'flex',
    justifyContent:'space-evenly',
-   
    gap: '10px',
    flexWrap:'wrap',
 }))

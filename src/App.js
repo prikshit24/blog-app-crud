@@ -1,9 +1,6 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Header from './Components/Header/Header';
-import Footer from './Components/Footer/Footer';
 import Home from './Pages/Home/Home';
-import PageNotFound from './Pages/PageNotFound/PageNotFound';
 import Blogs from './Pages/Blogs/Blogs';
 import BlogPage from './Features/Posts/BlogPage';
 import EditBlog from './Features/Posts/EditBlog';

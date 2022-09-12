@@ -1,7 +1,6 @@
 import { Box, Typography, styled } from "@mui/material";
 
 export const HeaderContainer = styled(Box)(({theme}) => ({
-    width:'calc(100%-100px)',
     height:'70px',
     paddingInline:'50px',
     backgroundColor: '#341c8d',

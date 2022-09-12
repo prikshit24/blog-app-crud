@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Label, SubmitBtn, TextArea, TitleField } from './Components/AddPostsComponents';
+import { BtnContainer, CancleBtn, Container, Label, SubmitBtn, TextArea, TitleField } from './Components/AddPostsComponents';
 import { useDispatch, useSelector } from 'react-redux';
 import { useStyles } from './Components/useStyles';
 
@@ -8,7 +8,7 @@ import { FormControl, MenuItem, Select } from '@mui/material';
 import { addNewPost } from "./postSlice";
 import { useNavigate } from 'react-router-dom';
 
-const AddPosts = () => {
+const AddPosts = ({setCreatePost}) => {
 
     const dispatch = useDispatch();
     const classes = useStyles();
@@ -63,8 +63,9 @@ const AddPosts = () => {
 
     return (
         <Container>
-            <Label>Title</Label>
+            <Label>Title :-</Label>
             <TitleField onChange={titleChange} />
+            <Label>Author :-</Label>
             <FormControl className={classes.formControl} fullWidth>
                 <Select
                     MenuProps={menuProps}
@@ -79,9 +80,12 @@ const AddPosts = () => {
                     {users.map((user, index) => <MenuItem key={index} value={user.id}>{user.name}</MenuItem>)}
                 </Select>
             </FormControl>
-            <Label>Content</Label>
+            <Label>Content :-</Label>
             <TextArea onChange={contentChange} />
+            <BtnContainer>
             <SubmitBtn onClick={onSavePostClicked} disabled={!save}>Submit</SubmitBtn>
+            <CancleBtn onClick={ () => setCreatePost(false)}>Cancle</CancleBtn>
+            </BtnContainer>
         </Container>
     )
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container } from './components';
+import { Container, PostContainer } from './components';
 import { selectAllPosts, getPostsStatus, getPostsError, fetchPosts } from '../../Features/Posts/postSlice';
 import PostsRender from '../../Features/Posts/PostsRender';
 
@@ -22,7 +22,7 @@ const Home = () => {
     content = <p>"Loading..."</p>;
   } else if (postStatus === 'succeeded') {
     const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
-    content = orderedPosts.map((post, index) => index < 5 && <PostsRender key={post.id} post={post} />)
+    content = orderedPosts.map((post, index) => index < 9 && <PostsRender key={post.id} post={post} />)
   } else if (postStatus === 'failed') {
     content = <p>{error}</p>;
   }
@@ -30,7 +30,9 @@ const Home = () => {
   return (
     <Container>
       <h2>Latest Blogs</h2>
+      <PostContainer>
       {content}
+      </PostContainer>
     </Container>
   )
 }
