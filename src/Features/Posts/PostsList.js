@@ -1,29 +1,29 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { selecctAllPosts } from './postSlice';
-import PostAuthor from './PostAuthor';
-import TimeAgo from './TimeAgo';
+import { selectAllPosts, getPostsStatus, getPostsError } from './postSlice';
+import PostsRender from './PostsRender';
+
 
 const PostsList = () => {
 
-    const posts = useSelector(selecctAllPosts)
+  const posts = useSelector(selectAllPosts);
+  const postStatus = useSelector(getPostsStatus);
+  const error = useSelector(getPostsError);
 
-    const orderPosts = posts.slice().sort((a,b) => b.date.localeCompare(a.date))
+  let content;
+  if (postStatus === 'loading') {
+      content = <p>"Loading..."</p>;
+  } else if (postStatus === 'succeeded') {
+      const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
+      content = orderedPosts.map(post => <PostsRender key={post.id} post={post} />)
+  } else if (postStatus === 'failed') {
+      content = <p>{error}</p>;
+  }
 
-    const renderPosts = orderPosts.map((post) => (
-        <div key={post.id}>
-            <h3>{post.title}</h3>
-            <p>{post.content}</p>
-            <p>
-              <PostAuthor userId={post.userId} />
-              <TimeAgo timeStamp={post.date}/>
-            </p>
-        </div>
-    ))
   return (
     <div>
-        <h2>Posts</h2>
-        {renderPosts}
+      <h2>Posts</h2>
+      {content}
     </div>
   )
 }

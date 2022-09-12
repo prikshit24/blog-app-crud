@@ -14,3 +14,15 @@ export const HeaderText = styled(Typography)(({theme}) => ({
     color:'#fff',
     fontSize:'24px',
 }))
+
+export const ListContainer = styled(Box)(({theme}) => ({
+    display:'flex',
+    alignItems:'center',
+    gap:'20px',
+}))
+
+export const NavigateList = styled(Typography)(({theme}) => ({
+    color:'#fff',
+    fontSize:'18px',
+    cursor:'pointer',
+}))
