@@ -1,15 +1,15 @@
 import { useSelector } from 'react-redux'
-import { selectPostById } from './postsSlice'
+import { selectPostById } from './postSlice';
 
 import PostAuthor from "./PostAuthor";
 import TimeAgo from "./TimeAgo";
-import ReactionButtons from "./ReactionButtons";
 
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const BlogPage = () => {
     const { postId } = useParams()
+    const navigate = useNavigate()
 
     const post = useSelector((state) => selectPostById(state, Number(postId)))
 
@@ -25,12 +25,12 @@ const BlogPage = () => {
         <div>
             <h2>{post.title}</h2>
             <p>{post.body}</p>
+            <h5 onClick={() => { navigate(`/Blog/edit/${post.id}`) }}>Edit Post</h5>
+
             <p className="postCredit">
-                <Link to={`/post/edit/${post.id}`}>Edit Post</Link>
                 <PostAuthor userId={post.userId} />
                 <TimeAgo timestamp={post.date} />
             </p>
-            <ReactionButtons post={post} />
         </div>
     )
 }

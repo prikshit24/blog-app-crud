@@ -1,23 +1,30 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import Home from './Pages/Home/Home';
 import PageNotFound from './Pages/PageNotFound/PageNotFound';
 import Blogs from './Pages/Blogs/Blogs';
+import BlogPage from './Features/Posts/BlogPage';
+import EditBlog from './Features/Posts/EditBlog';
+import Layout from './Components/Layout/Layout';
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/Blogs" element={<Blogs />} />
-          <Route element={<PageNotFound />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+
+          <Route index element={<Home />} />
+
+          <Route path="Blog">
+            <Route index element={<Blogs />} />
+            <Route path=":postId" element={<BlogPage />} />
+            <Route path="edit/:postId" element={<EditBlog />} />
+          </Route>
+
+        </Route>
+      </Routes>
     </>
   );
 }

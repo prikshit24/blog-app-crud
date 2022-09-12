@@ -11,7 +11,7 @@ const Header = () => {
         <HeaderText>Blog App</HeaderText>
         <ListContainer>
         <NavigateList onClick={() => { navigator('/') }}>Home</NavigateList>
-        <NavigateList onClick={() => { navigator('/Blogs') }}>Blogs</NavigateList>
+        <NavigateList onClick={() => { navigator('/Blog') }}>Blogs</NavigateList>
         </ListContainer>
     </HeaderContainer>
   )

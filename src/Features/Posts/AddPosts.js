@@ -3,14 +3,16 @@ import { Container, Label, SubmitBtn, TextArea, TitleField } from './Components/
 import { useDispatch, useSelector } from 'react-redux';
 import { useStyles } from './Components/useStyles';
 
-import { selecctAllUsers } from '../Users/userSlice';
+import { selectAllUsers } from '../Users/userSlice';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { addNewPost } from "./postSlice";
+import { useNavigate } from 'react-router-dom';
 
 const AddPosts = () => {
 
     const dispatch = useDispatch();
     const classes = useStyles();
+    const navigate = useNavigate()
 
     const menuProps = {
         classes: {
@@ -24,7 +26,7 @@ const AddPosts = () => {
     const [userId, setUserId] = useState('');
     const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
-    const users = useSelector(selecctAllUsers)
+    const users = useSelector(selectAllUsers)
 
     const save = [title, content, userId].every(Boolean) && addRequestStatus === 'idle';
 
@@ -49,6 +51,7 @@ const AddPosts = () => {
                 setTitle('')
                 setContent('')
                 setUserId('')
+                navigate('/')
             } catch (err) {
                 console.error('Failed to save the post', err)
             } finally {
